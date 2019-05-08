@@ -1,0 +1,7 @@
+---
+platform: linux-amd64
+node_exporter_version: v0.17.0
+group: prometheus
+user: prometheus
+tmp_path: /tmp
+binary_path: /etc/prometheus

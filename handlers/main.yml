@@ -1,0 +1,12 @@
+---
+- name: Ensure node exporter is running
+  service:
+    name: node_exporter
+    state: started
+  become: yes
+
+- name: Restart node exporter
+  service:
+    name: node_exporter
+    state: restarted
+  become: yes

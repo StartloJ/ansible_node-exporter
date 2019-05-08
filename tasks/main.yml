@@ -1,0 +1,44 @@
+---
+- name: download packages
+  get_url:
+    url: "https://github.com/prometheus/node_exporter/releases/download/{{ node_exporter_version }}/node_exporter-{{node_exporter_version[1:]}}.{{platform}}.tar.gz"
+    dest: "{{ tmp_path }}/node_exporter.tar.gz"
+    mode: 0766
+    sha256sum: d2e00d805dbfdc67e7291ce2d2ff151f758dd7401dd993411ff3818d0e231489
+
+- name: Ensure group "prometheus" exists
+  group:
+    name: "{{ group }}"
+    state: present
+
+- name: Creates directory exporter
+  file:
+    path: "{{ binary_path }}"
+    state: directory
+
+- name: Add user prometheus
+  user:
+    name: "{{user}}"
+    group: "{{group}}"
+    expires: -1
+    shell: /bin/false
+    create_home: no
+
+- name: Extract file
+  unarchive:
+    src: "{{tmp_path}}/node_exporter.tar.gz"
+    dest: "{{binary_path}}"
+    remote_src: yes
+    mode: 0766
+    owner: "{{user}}"
+    group: "{{group}}"
+    extra_opts: [--strip-components=1]
+
+- name: Create service file
+  template:
+    src: ./templates/node_exporter.service.j2
+    dest: /etc/systemd/system/node_exporter.service
+    mode: '0644'
+  notify:
+    - Ensure node exporter is running
+    - Restart node exporter
