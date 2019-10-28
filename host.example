@@ -1,0 +1,2 @@
+[node_exporter]
+test-host ansible_user=ubuntu ansible_host=10.88.89.10 ansible_port=22

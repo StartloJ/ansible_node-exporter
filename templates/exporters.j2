@@ -1,0 +1,5 @@
+# Option for node exporter
+OPTIONS={% for option in node_options  %}
+--{{ option }}
+{%- if loop.first %} {% endif %}
+{% endfor %}

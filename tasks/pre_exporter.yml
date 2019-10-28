@@ -1,0 +1,17 @@
+- name: Ensure group "prometheus" exists
+  group:
+    name: "{{ group }}"
+    state: present
+
+- name: Creates directory exporter
+  file:
+    path: "{{ binary_path }}"
+    state: directory
+
+- name: Add user prometheus
+  user:
+    name: "{{ user }}"
+    group: "{{ group | default(user) }}"
+    expires: -1
+    shell: /bin/false
+    create_home: no

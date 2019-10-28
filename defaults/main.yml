@@ -1,7 +1,24 @@
 ---
 platform: linux-amd64
-node_exporter_version: v0.17.0
-group: prometheus
-user: prometheus
+group: exporter
+user: exporter
 tmp_path: /tmp
-binary_path: /etc/prometheus
+binary_path: /etc/exporters
+#####################
+### Node exporter ###
+#####################
+node_exporter_enable: true
+node_exporter_version: v0.18.1
+node_path: "{{ binary_path }}/node"
+node_default_value_path: /etc/default/
+# Pls. read more at <https://github.com/prometheus/node_exporter#enabled-by-default>
+node_options: [] 
+  # - devstat
+  # - interrupts
+  # - mountstats
+  # - ntp
+
+######################
+### Other exporter ###
+######################
+# In future
