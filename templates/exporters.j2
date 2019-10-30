@@ -1,5 +1,14 @@
+{% if node_exporter_enable %}
 # Option for node exporter
 OPTIONS={% for option in node_options  %}
 --{{ option }}
 {%- if loop.first %} {% endif %}
 {% endfor %}
+{% elif elasticsearch_exporter_enable %}
+# Option for elasticsearch exporter
+OPTIONS=
+{% elif postgres_exporter_enable %}
+# Option for postgres exporter
+{% else %}
+# Not set
+{% endif %}

@@ -15,3 +15,9 @@
     expires: -1
     shell: /bin/false
     create_home: no
+
+- name: Create default values file
+  template:
+    src: ./templates/exporter.j2
+    dest: "{{ default_value_path }}/exporters"
+    mode: '0644'
