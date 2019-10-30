@@ -1,7 +1,7 @@
 {% if node_exporter_enable %}
 # Option for node exporter
 OPTIONS={% for option in node_options  %}
---{{ option }}
+--collector.{{ option }}
 {%- if loop.first %} {% endif %}
 {% endfor %}
 {% elif elasticsearch_exporter_enable %}
