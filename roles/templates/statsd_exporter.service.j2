@@ -1,0 +1,12 @@
+[Unit]
+Description=statsd_exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{user}}
+ExecStart={{binary_path}}/statsd_exporter {{ statsd_exporter_opstions }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

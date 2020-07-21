@@ -1,0 +1,60 @@
+---
+- name: Ensure node_exporter is running
+  service:
+    name: node_exporter
+    state: started
+  become: yes
+
+- name: Restart node_exporter
+  service:
+    name: node_exporter
+    state: restarted
+  become: yes
+
+- name: Ensure memcached_exporter is running
+  service:
+    name: memcached_exporter
+    state: started
+  become: yes
+
+- name: Restart memcached_exporter
+  service:
+    name: memcached_exporter
+    state: restarted
+  become: yes
+
+- name: Ensure haproxy_exporter is running
+  service:
+    name: haproxy_exporter
+    state: started
+  become: yes
+
+- name: Restart haproxy_exporter
+  service:
+    name: haproxy_exporter
+    state: restarted
+  become: yes
+
+- name: Ensure statsd_exporter is running
+  service:
+    name: statsd_exporter
+    state: started
+  become: yes
+
+- name: Restart statsd_exporter
+  service:
+    name: statsd_exporter
+    state: restarted
+  become: yes
+
+- name: Ensure blackbox_exporter is running
+  service:
+    name: blackbox_exporter
+    state: started
+  become: yes
+
+- name: Restart blackbox_exporter
+  service:
+    name: blackbox_exporter
+    state: restarted
+  become: yes

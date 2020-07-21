@@ -1,0 +1,36 @@
+---
+- name: download memcached_exporter packages
+  get_url:
+    url: "https://github.com/prometheus/memcached_exporter/releases/download/{{ memcached_exporter_version }}/memcached_exporter-{{memcached_exporter_version[1:]}}.{{platform}}.tar.gz"
+    dest: "{{ tmp_path }}/memcached_exporter.tar.gz"
+    mode: 0766
+    sha256sum: "{{ sha256sum_memcached_exporter }}"
+
+- name: Creates directory memcached_exporter
+  file:
+    path: "{{ memcached_exporter_path }}"
+    state: directory
+
+- name: Extract file
+  unarchive:
+    src: "{{ tmp_path }}/memcached_exporter.tar.gz"
+    dest: "{{ memcached_exporter_path }}"
+    remote_src: yes
+    mode: 0766
+    owner: "{{user}}"
+    group: "{{group}}"
+    extra_opts: [--strip-components=1]
+
+- name: Clean tar file
+  file:
+    path: "{{ tmp_path }}/memcached_exporter.tar.gz"
+    state: absent
+
+- name: Create memcached_exporter service file
+  template:
+    src: ./templates/memcached_exporter.service.j2
+    dest: /etc/systemd/system/memcached_exporter.service
+    mode: '0644'
+  notify:
+    - Ensure memcached_exporter is running
+    - Restart memcached_exporter

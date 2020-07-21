@@ -1,0 +1,19 @@
+    [Unit]
+    Description=Prometheus HAProxy Exporter
+    After=network.target
+    
+    [Service]
+    Type=simple
+    User={{ user }}
+    Group={{ group }}
+    
+    ExecStart={{binary_path}}/haproxy_exporter {{ haproxy_exporter_options }}
+    ExecReload=/bin/kill -HUP $MAINPID
+    TimeoutStopSec=10s
+    SendSIGKILL=no
+
+    SyslogIdentifier=prometheus_haproxy_exporter
+    Restart=always
+    
+    [Install]
+    WantedBy=multi-user.target
