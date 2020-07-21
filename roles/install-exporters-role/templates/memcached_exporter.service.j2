@@ -1,11 +1,11 @@
 [Unit]
-Description=statsd_exporter
+Description=Node Exporter
 Wants=network-online.target
 After=network-online.target
 
 [Service]
 User={{user}}
-ExecStart={{binary_path}}/statsd_exporter {{ statsd_exporter_opstions }}
+ExecStart={{ binary_path }}/memcached_exporter {{ memcached_exporter_options }}
 Restart=on-failure
 
 [Install]

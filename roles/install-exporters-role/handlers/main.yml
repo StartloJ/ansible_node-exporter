@@ -58,3 +58,15 @@
     name: blackbox_exporter
     state: restarted
   become: yes
+
+- name: Ensure snmp_exporter is running
+  service:
+    name: snmp_exporter
+    state: started
+  become: yes
+
+- name: Restart snmp_exporter
+  service:
+    name: snmp_exporter
+    state: restarted
+  become: yes

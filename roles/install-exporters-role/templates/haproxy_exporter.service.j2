@@ -7,7 +7,7 @@
     User={{ user }}
     Group={{ group }}
     
-    ExecStart={{binary_path}}/haproxy_exporter {{ haproxy_exporter_options }}
+    ExecStart={{ binary_path }}/haproxy_exporter {{ haproxy_exporter_options }}
     ExecReload=/bin/kill -HUP $MAINPID
     TimeoutStopSec=10s
     SendSIGKILL=no

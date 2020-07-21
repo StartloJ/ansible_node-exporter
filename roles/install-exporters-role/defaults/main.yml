@@ -27,25 +27,22 @@ memcached_exporter_enable: true
 memcached_exporter_version: 
 memcached_exporter_path: "{{ binary_path }}/memcached_exporter"
 memcached_exporter_options: []
-memcached_exporter_port:
-memcached_exporter_cachesize:
-memcached_exporter_maxconn:
 memcached_exporter_default_value_path: /etc/default/
 sha256sum_memcached_exporter:
 
-##########################
-#### haproxy_exporter ####
-##########################
+########################
+### haproxy_exporter ###
+########################
 haproxy_exporter_enable: true
 haproxy_exporter_version: 
 haproxy_exporter_path: "{{ binary_path }}/haproxy_exporter"
-haproxy_exporter_options: [] #read options flags in haproxy_exporter_config_file.conf.j2 (in templates)
+haproxy_exporter_options: [] #read options flags in haproxy_exporter_option_flags.j2 (in templates)
 haproxy_exporter_default_value_path: /etc/default/
 sha256sum_haproxy_exporter:
 
-##########################
-#### statsd_exporter #####
-##########################
+#######################
+### statsd_exporter ###
+#######################
 statsd_exporter_enable: true
 statsd_exporter_version: 
 statsd_exporter_path: "{{ binary_path }}/statsd_exporter"
@@ -53,12 +50,22 @@ statsd_exporter_options: [] #read option flags at https://github.com/prometheus/
 statsd_exporter_default_value_path: /etc/default/
 sha256sum_statsd_exporter:
 
-############################
-#### blackbox_exporter #####
-############################
+#########################
+### blackbox_exporter ###
+#########################
 blackbox_exporter_enable: true
 blackbox_exporter_version: 
 blackbox_exporter_path: "{{ binary_path }}/blackbox_exporter"
 blackbox_exporter_options: [] #read option flags at https://github.com/prometheus/blackbox_exporter
 blackbox_exporter_default_value_path: /etc/default/
 sha256sum_blackbox_exporter:
+
+#####################
+### snmp_exporter ###
+#####################
+snmp_exporter_enable: true
+snmp_exporter_version: 
+snmp_exporter_path: "{{ binary_path }}/snmp_exporter"
+snmp_exporter_options: [] #read option flags at https://github.com/prometheus/snmp_exporter
+smnp_exporter_default_value_path: /etc/default/
+sha256sum_snmp_exporter:

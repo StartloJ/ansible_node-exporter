@@ -1,21 +1,19 @@
 # Ansible-prometheus-exporters 
-Roles ansible-playbook for install exporter in remotely host
-
-# Exporter support now
-- Node Exporter
-- etc. in future
-
-## Example Playbook
-```yaml
-    - hosts: all
-      roles:
-        - ansible-prometheus-exporters
-```
-
-## License
-
-MIT
+Roles ansible-playbook for install exporters in remotely host
 
 ## Author Information
-
 Opsta (Thailand) Co.,Ltd.
+- Watcharin Yangngam
+- Punnapop Chalor
+
+# Exporter support now
+- blackbox_exporter
+- haproxy_exporter
+- memcached_exporter
+- node_exporter
+- snmp_exporter
+- statsd_exporter
+- etc. in future
+
+## License
+MIT

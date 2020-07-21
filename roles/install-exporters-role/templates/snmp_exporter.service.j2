@@ -1,0 +1,9 @@
+[Unit]
+Description=Prometheus Exporter for SNMP metrics
+After=network.target
+
+[Service]
+ExecStart={{ binary_path }}/snmp_exporter {{ snmp_exporter_options }}
+
+[Install]
+WantedBy=multi-user.target

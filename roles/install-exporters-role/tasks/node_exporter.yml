@@ -8,7 +8,7 @@
 
 - name: Creates directory node exporter
   file:
-    path: "{{ node_path }}"
+    path: "{{ node_exporter_path }}"
     state: directory
 
 - name: Extract file
