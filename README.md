@@ -8,8 +8,13 @@ Opsta (Thailand) Co.,Ltd.
 
 # Exporter support now
 - blackbox_exporter
+- collectd_exporter
+- consul_exporter
+- graphite_exporter
 - haproxy_exporter
+- influxdb_exporter
 - memcached_exporter
+- mysqld_exporter
 - node_exporter
 - snmp_exporter
 - statsd_exporter
