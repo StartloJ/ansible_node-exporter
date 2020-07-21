@@ -1,0 +1,36 @@
+---
+- name: download influxdb_exporter packages
+  get_url:
+    url: "https://github.com/prometheus/influxdb_exporter/releases/download/{{ influxdb_exporter_version }}/influxdb_exporter-{{influxdb_exporter_version[1:]}}.{{platform}}.tar.gz"
+    dest: "{{ tmp_path }}/influxdb_exporter.tar.gz"
+    mode: 0766
+    sha256sum: "{{ sha256sum_influxdb_exporter }}"
+
+- name: Creates directory influxdb_exporter
+  file:
+    path: "{{ influxdb_exporter }}"
+    state: directory
+
+- name: Extract file
+  unarchive:
+    src: "{{ tmp_path }}/influxdb_exporter.tar.gz"
+    dest: "{{ influxdb_exporter_path }}"
+    remote_src: yes
+    mode: 0766
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    extra_opts: [--strip-components=1]
+
+- name: Clean tar file
+  file:
+    path: "{{ tmp_path }}/influxdb_exporter.tar.gz"
+    state: absent
+
+- name: Create service file
+  template:
+    src: ./templates/influxdb_exporter.service.j2
+    dest: /etc/systemd/system/influxdb_exporter.service
+    mode: '0644'
+  notify:
+    - Ensure influxdb_exporter is running
+    - Restart influxdb_exporter

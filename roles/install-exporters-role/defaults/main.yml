@@ -69,3 +69,47 @@ snmp_exporter_path: "{{ binary_path }}/snmp_exporter"
 snmp_exporter_options: [] #read option flags at https://github.com/prometheus/snmp_exporter
 smnp_exporter_default_value_path: /etc/default/
 sha256sum_snmp_exporter:
+
+#########################
+### influxdb_exporter ###
+#########################
+influxdb_exporter_enable: true
+influxdb_exporter_version: 
+influxdb_exporter_path: "{{ binary_path }}/influxdb_exporter"
+sha256sum_influxdb_exporter:
+
+#########################
+### collectd_exporter ###
+#########################
+collectd_exporter_enable: true
+collectd_exporter_version: 
+collectd_exporter_path: "{{ binary_path }}/collectd_exporter"
+sha256sum_collectd_exporter:
+
+#######################
+### consul_exporter ###
+#######################
+consul_exporter_enable: true
+consul_exporter_version: 
+consul_exporter_path: "{{ binary_path }}/consul_exporter"
+consul_exporter_options: #read option flags at https://github.com/prometheus/consul_exporter
+sha256sum_consul_exporter:
+
+#########################
+### graphite_exporter ###
+#########################
+graphite_exporter_enable: true
+graphite_exporter_version: 
+graphite_exporter_path: "{{ binary_path }}/graphite_exporter"
+graphite_exporter_options: #read option flags at https://github.com/prometheus/graphite_exporter
+graphite_exporter_default_value_path: /etc/default/
+sha256sum_graphite_exporter:
+
+#######################
+### mysqld_exporter ###
+#######################
+mysqld_exporter_enable: true
+mysqld_exporter_version: 
+mysqld_exporter_path: "{{ binary_path }}/mysqld_exporter"
+mysqld_exporter_options: #read option flags at https://github.com/prometheus/graphite_exporter
+sha256sum_mysqld_exporter:

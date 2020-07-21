@@ -1,0 +1,12 @@
+[Unit]
+Description=consul_exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{user}}
+ExecStart={{ binary_path }}/consul_exporter {{ consul_exporter_options }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

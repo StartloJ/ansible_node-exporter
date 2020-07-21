@@ -29,7 +29,7 @@
 - name: Create config file
   template:
     src: ./templates/blackbox_exporter_config_file.yml.j2
-    dest: "{{ statsd_exporter_default_value_path }}/blackbox_exporter_config_file.yml"
+    dest: "{{ blackbox_exporter_default_value_path }}/blackbox_exporter_config_file.yml"
     mode: '0644'
 
 - name: Create service file

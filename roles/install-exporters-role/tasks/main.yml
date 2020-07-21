@@ -1,4 +1,21 @@
 ---
 - include_tasks: pre_exporter.yml
+
+- include_tasks: blackbox_exporter.yml
+  when: blackbox_exporter_enabale
+- include_tasks: collectd_exporter.yml
+  when: collectd_exporter_enabale
+- include_tasks: consul_exporter.yml
+  when: consul_exporter_enabale
+- include_tasks: graphite_exporter.yml
+  when: graphite_exporter_enabale
+- include_tasks: haproxy_exporter.yml
+  when: haproxy_exporter_enabale
+- include_tasks: memcached_exporter.yml
+  when: memcached_exporter_enabale
 - include_tasks: node_exporter.yml
-  when: node_exporter_enable
+  when: node_exporter_enabale
+- include_tasks: snmp_exporter.yml
+  when: snmp_exporter_enabale
+- include_tasks: statsd_exporter.yml
+  when: statsd_exporter_enabale

@@ -1,0 +1,12 @@
+[Unit]
+Description=graphite_exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{user}}
+ExecStart={{ binary_path }}/graphite_exporter {{ graphite_exporter_options }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

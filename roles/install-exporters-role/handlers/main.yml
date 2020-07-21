@@ -70,3 +70,63 @@
     name: snmp_exporter
     state: restarted
   become: yes
+
+- name: Ensure influxdb_exporter is running
+  service:
+    name: influxdb_exporter
+    state: started
+  become: yes
+
+- name: Restart influxdb_exporter
+  service:
+    name: influxdb_exporter
+    state: restarted
+  become: yes
+
+- name: Ensure collectd_exporter is running
+  service:
+    name: collectd_exporter
+    state: started
+  become: yes
+
+- name: Restart collectd_exporter
+  service:
+    name: collectd_exporter
+    state: restarted
+  become: yes
+
+- name: Ensure consul_exporter is running
+  service:
+    name: consul_exporter
+    state: started
+  become: yes
+
+- name: Restart consul_exporter
+  service:
+    name: consul_exporter
+    state: restarted
+  become: yes
+
+- name: Ensure graphite_exporter is running
+  service:
+    name: graphite_exporter
+    state: started
+  become: yes
+
+- name: Restart graphite_exporter
+  service:
+    name: graphite_exporter
+    state: restarted
+  become: yes
+
+- name: Ensure mysqld_exporter is running
+  service:
+    name: mysqld_exporter
+    state: started
+  become: yes
+
+- name: Restart mysqld_exporter
+  service:
+    name: mysqld_exporter
+    state: restarted
+  become: yes

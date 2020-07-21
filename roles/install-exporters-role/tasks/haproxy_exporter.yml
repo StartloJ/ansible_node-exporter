@@ -26,12 +26,6 @@
     path: "{{ tmp_path }}/haproxy_exporter.tar.gz"
     state: absent
 
-- name: Create default values file
-  template:
-    src: ./templates/exporter.j2
-    dest: "{{ haproxy_exporter_default_value_path }}/exporters"
-    mode: '0644'
-    
 - name: Create service file
   template:
     src: ./templates/haproxy_exporter.service.j2
