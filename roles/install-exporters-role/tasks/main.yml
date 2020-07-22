@@ -13,6 +13,8 @@
   when: graphite_exporter_enabale
 - include_tasks: haproxy_exporter.yml
   when: haproxy_exporter_enabale
+- include_tasks: jmx_exporter.yml
+  when: jmx_exporter_enabale
 - include_tasks: memcached_exporter.yml
   when: memcached_exporter_enabale
 - include_tasks: node_exporter.yml

@@ -119,5 +119,13 @@ sha256sum_mysqld_exporter:
 ###########################
 cloudwatch_exporter_enable: true
 cloudwatch_exporter_version: 
-cloudwatch_exporter_path: "{{ binary_path }}/mysqld_exporter"
+cloudwatch_exporter_path: "{{ binary_path }}/cloudwatch_exporter"
 cloudwatch_exporter_default_value_path:
+
+####################
+### jmx_exporter ###
+####################
+jmx_exporter_enable: true
+jmx_exporter_version: 
+jmx_exporter_path: "{{ binary_path }}/jmx_exporter"
+jmx_exporter_default_value_path:
