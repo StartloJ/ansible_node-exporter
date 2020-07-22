@@ -3,6 +3,8 @@
 
 - include_tasks: blackbox_exporter.yml
   when: blackbox_exporter_enabale
+- include_tasks: cloudwatch_exporter.yml
+  when: cloudwatch_exporter_enabale
 - include_tasks: collectd_exporter.yml
   when: collectd_exporter_enabale
 - include_tasks: consul_exporter.yml

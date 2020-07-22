@@ -1,0 +1,47 @@
+---
+- name: Install maven
+  apt:
+    name: maven
+    update_cache: yes
+
+- name: Install openjdk
+  apt:
+    name: default-jdk
+
+- name: download jmx_exporter packages
+  get_url:
+    url: "https://github.com/prometheus/jmx_exporter/archive/parent-{{ jmx_exporter_version}}.tar.gz"
+    dest: "{{ tmp_path }}/jmx_exporter.tar.gz"
+    mode: 0766
+
+- name: Creates directory jmx_exporter
+  file:
+    path: "{{ jmx_exporter_path }}"
+    state: directory
+
+- name: Extract file
+  unarchive:
+    src: "{{ tmp_path }}/jmx_exporter.tar.gz"
+    dest: ""
+    remote_src: yes
+    mode: 0766
+    owner: "{{user}}"
+    group: "{{group}}"
+    extra_opts: [--strip-components=1]
+
+- name: Clean tar file
+  file:
+    path: "{{ tmp_path }}/jmx_exporter.tar.gz"
+    state: absent
+
+- name: Run mvn package to build .jar
+  shell: cd {{ jmx_exporter_path }} && mvn package
+
+- name: Create config file
+  template:
+    src: ./templates/jmx_exporter_config_file.yml.j2
+    dest: "{{ jmx_exporter_default_value_path }}/jmx_exporter_config_file.yml"
+    mode: '0644'
+
+- name: Run jmx_exporter
+  shell: cd {{ jmx_exporter_path }} && java -javaagent:jmx_prometheus_javaagent/target/jmx_prometheus_javaagent-{{ jmx_exporter_version }}.jar=8080:{{ jmx_exporter_default_value_path }}/jmx_exporter_config_file.yml -jar jmx_prometheus_httpserver/target/jmx_prometheus_httpserver-{{ jmx_exporter_version }}-jar-with-dependencies.jar
