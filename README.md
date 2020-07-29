@@ -1,7 +1,7 @@
-# Ansible-prometheus-exporters 
+# Ansible-Prometheus-Exporters-Installer
 Roles ansible-playbook for install exporters in remotely host
 
-## Author Information
+## Authors Information
 Opsta (Thailand) Co.,Ltd.
 - Watcharin Yangngam
 - Punnapop Chalor
