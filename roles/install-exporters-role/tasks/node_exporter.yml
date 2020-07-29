@@ -28,8 +28,8 @@
 
 - name: Create default values file
   template:
-    src: ./templates/exporter.j2
-    dest: "{{ node_default_value_path }}/exporters"
+    src: ./templates/node_exporter.j2
+    dest: "{{ node_default_value_path }}/node_exporter"
     mode: '0644'
 
 - name: Create service file

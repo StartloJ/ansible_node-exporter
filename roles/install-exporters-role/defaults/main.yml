@@ -1,7 +1,7 @@
 ---
 platform: linux-amd64
-group: exporter
-user: exporter
+group: exporters
+user: exporters
 tmp_path: /tmp
 binary_path: /etc/exporters
 
