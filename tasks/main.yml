@@ -1,4 +1,0 @@
----
-- include_tasks: pre_exporter.yml
-- include_tasks: node_exporter.yml
-  when: node_exporter_enable

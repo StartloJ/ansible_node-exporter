@@ -1,0 +1,2 @@
+[all]
+test-host ansible_user=ubuntu ansible_host=10.88.202.100 ansible_port=22

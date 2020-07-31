@@ -1,0 +1,47 @@
+---
+- name: Install maven
+  apt:
+    name: maven
+    update_cache: yes
+
+- name: Install openjdk
+  apt:
+    name: default-jdk
+
+- name: download cloudwatch_exporter packages
+  get_url:
+    url: "https://github.com/prometheus/cloudwatch_exporter/archive/cloudwatch_exporter-{{ cloudwatch_exporter_version}}tar.gz"
+    dest: "{{ tmp_path }}/cloudwatch_exporter.tar.gz"
+    mode: 0766
+
+- name: Creates directory node exporter
+  file:
+    path: "{{ cloudwatch_exporter_path }}"
+    state: directory
+
+- name: Extract file
+  unarchive:
+    src: "{{ tmp_path }}/cloudwatch_exporter.tar.gz"
+    dest: ""
+    remote_src: yes
+    mode: 0766
+    owner: "{{user}}"
+    group: "{{group}}"
+    extra_opts: [--strip-components=1]
+
+- name: Clean tar file
+  file:
+    path: "{{ tmp_path }}/cloudwatch_exporter.tar.gz"
+    state: absent
+
+- name: Run mvn package to build .jar
+  shell: cd {{ cloudwatch_exporter_path }} && mvn package
+
+- name: Create config file
+  template:
+    src: ./templates/cloudwatch_exporter_config_file.yml.j2
+    dest: "{{ cloudwatch_exporter_default_value_path }}/cloudwatch_exporter_config_file.yml"
+    mode: '0644'
+
+- name: Run cloudwatch_exporter
+  shell: cd {{ cloudwatch_exporter_path }} && java -jar target/cloudwatch_exporter-{{ cloudwatch_exporter_version }}-jar-with-dependencies.jar 9106 {{ cloudwatch_exporter_default_value_path }}/cloudwatch_exporter_config_file.yml

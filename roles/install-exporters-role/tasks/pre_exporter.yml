@@ -1,12 +1,15 @@
+--- 
 - name: Ensure group "prometheus" exists
   group:
     name: "{{ group }}"
     state: present
+  become: yes
 
 - name: Creates directory exporter
   file:
     path: "{{ binary_path }}"
     state: directory
+  become: yes
 
 - name: Add user prometheus
   user:
@@ -15,9 +18,4 @@
     expires: -1
     shell: /bin/false
     create_home: no
-
-- name: Create default values file
-  template:
-    src: ./templates/exporter.j2
-    dest: "{{ default_value_path }}/exporters"
-    mode: '0644'
+  become: yes

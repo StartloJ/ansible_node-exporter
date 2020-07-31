@@ -1,0 +1,36 @@
+---
+- name: download mysqld_exporter packages
+  get_url:
+    url: "https://github.com/prometheus/mysqld_exporter/releases/download/{{ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version[1:]}}.{{platform}}.tar.gz"
+    dest: "{{ tmp_path }}/mysqld_exporter.tar.gz"
+    mode: 0766
+    sha256sum: "{{ sha256sum_mysqld_exporter }}"
+
+- name: Creates directory mysqld_exporter
+  file:
+    path: "{{ mysqld_exporter_path }}"
+    state: directory
+
+- name: Extract file
+  unarchive:
+    src: "{{ tmp_path }}/mysqld_exporter.tar.gz"
+    dest: "{{ mysqld_exporter_path }}"
+    remote_src: yes
+    mode: 0766
+    owner: "{{user}}"
+    group: "{{group}}"
+    extra_opts: [--strip-components=1]
+
+- name: Clean tar file
+  file:
+    path: "{{ tmp_path }}/mysqld_exporter.tar.gz"
+    state: absent
+
+- name: Create service file
+  template:
+    src: ./templates/mysqld_exporter.service.j2
+    dest: /etc/systemd/system/mysqld_exporter.service
+    mode: '0644'
+  notify:
+    - Ensure mysqld_exporter is running
+    - Restart mysqld_exporter

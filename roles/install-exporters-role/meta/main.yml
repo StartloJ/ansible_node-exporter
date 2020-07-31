@@ -1,0 +1,14 @@
+galaxy_info:
+  author: StartloJ(Watcharin Yangngam) , GUNFLUENZA(Punnapop Chalor)
+  description: Ansible Playbook for Install Prometheus/Node Exporter
+  company: "Opsta (Thailand) Co.,Ltd."
+  license: MIT
+  min_ansible_version: 2.4
+  galaxy_tags:
+    - blackbox_exporter
+    - haproxy_exporter
+    - memcached_exporter
+    - node_exporter
+    - snmp_exporter
+    - statsd_exporter
+dependencies: []

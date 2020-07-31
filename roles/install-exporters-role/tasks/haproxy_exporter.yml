@@ -1,0 +1,36 @@
+---
+- name: download haproxy_exporter packages
+  get_url:
+    url: "https://github.com/prometheus/haproxy_exporter/releases/download/{{ haproxy_exporter_version }}/haproxy_exporter-{{haproxy_exporter_version[1:]}}.{{platform}}.tar.gz"
+    dest: "{{ tmp_path }}/haproxy_exporter.tar.gz"
+    mode: 0766
+    sha256sum: "{{ sha256sum_haproxy_exporter }}"
+
+- name: Creates directory haproxy_exporter
+  file:
+    path: "{{ haproxy_exporter_path }}"
+    state: directory
+
+- name: Extract file
+  unarchive:
+    src: "{{ tmp_path }}/haproxy_exporter.tar.gz"
+    dest: "{{ haproxy_exporter_path }}"
+    remote_src: yes
+    mode: 0766
+    owner: "{{user}}"
+    group: "{{group}}"
+    extra_opts: [--strip-components=1]
+
+- name: Clean tar file
+  file:
+    path: "{{ tmp_path }}/haproxy_exporter.tar.gz"
+    state: absent
+
+- name: Create service file
+  template:
+    src: ./templates/haproxy_exporter.service.j2
+    dest: /etc/systemd/system/haproxy_exporter.service
+    mode: '0644'
+  notify:
+    - Ensure haproxy_exporter is running
+    - Restart haproxy_exporter
